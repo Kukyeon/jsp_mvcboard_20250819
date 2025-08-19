@@ -11,11 +11,11 @@
 <body>
   <header class="header">
     <div class="header-container">
-      <div class="logo">MySite</div>
+      <div class="logo">미완성 페이지</div>
       <nav class="nav-menu">
         <ul>
           <li><a href="index.html">홈페이지 설명</a></li>
-          <li><a href="boardList.jsp">게시판</a></li>
+          <li><a href="boardList.do">게시판</a></li>
           <li><a href="contact.html">연락처</a></li>
           <li><a href="help.html">도움말</a></li>
         </ul>
@@ -25,18 +25,18 @@
 
   <main class="main-content">
     <section class="intro-section">
-      <h1>Welcome to MySite</h1>
+      <h1>게시판만 이용가능</h1>
       <p>
         저희 홈페이지에 오신 것을 환영합니다! 다양한 정보와 게시판을 통해 소통하세요.
       </p>
-      <a href="boardList.jsp" class="btn-primary">게시판 바로가기</a>
+      <a href="boardList.do" class="btn-primary">게시판 바로가기</a>
     </section>
 
     <section class="feature-section">
       <h2>주요 기능</h2>
       <div class="features">
         <div class="feature-item">
-          <h3>게시판</h3>
+          <h3><a href="boardList.do">게시판</a></h3>
           <p>손쉽게 글을 쓰고 읽을 수 있습니다.</p>
         </div>
         <div class="feature-item">

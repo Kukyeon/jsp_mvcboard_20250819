@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="css/write_style.css" />
 </head>
 <body>
+	
+	
+
   <div class="write-container">
     <h1 class="write-title">글 작성하기</h1>
     <form action="/create-post" method="post">
@@ -23,7 +26,7 @@
 
       <div class="button-group">
         <button type="submit" class="submit-btn">작성 완료</button>
-        <a href="boardList.jsp" class="cancel-btn">취소</a>
+        <a href="boardList.do" class="cancel-btn">취소</a>
       </div>
     </form>
   </div>

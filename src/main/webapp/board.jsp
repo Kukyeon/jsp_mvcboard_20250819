@@ -3,7 +3,7 @@
     <%@ page import="java.util.List" %>
 <%@ page import="com.kkuk.dao.BoardDao" %>
 <%@ page import="com.kkuk.dto.BoardDto" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
