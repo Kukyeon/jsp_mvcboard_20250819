@@ -1,6 +1,6 @@
 package com.kkuk.dto;
 
-public class boardDto {
+public class BoardDto {
 
 	private int bnum; // 글 순서
 	private String btitle; // 글 제목
@@ -9,12 +9,12 @@ public class boardDto {
 	private int bhit; // 조회수
 	private String bdate; // 글쓴날자
 	
-	public boardDto() {
+	public BoardDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public boardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate) {
+	public BoardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate) {
 		super();
 		this.bnum = bnum;
 		this.btitle = btitle;
