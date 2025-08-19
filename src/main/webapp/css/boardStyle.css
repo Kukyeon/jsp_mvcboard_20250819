@@ -1,0 +1,100 @@
+@charset "UTF-8";
+body {
+  background-color: #121212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+/* 게시판 제목 가운데 정렬 */
+.board-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #2a2a2a;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #2d2d2d;
+}
+
+td {
+  color: #d0d0d0;
+}
+
+.content-cell {
+  color: #bbbbbb;
+  font-size: 14px;
+}
+
+/* 하단 글쓰기 버튼 영역 */
+.button-container {
+  margin-top: 20px;
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+.write-btn {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.write-btn:hover {
+  background-color: #555;
+}
+
+@media (max-width: 600px) {
+  th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .write-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .board-title {
+    font-size: 20px;
+  }
+}
+
