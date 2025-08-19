@@ -14,7 +14,7 @@
 
   <div class="write-container">
     <h1 class="write-title">글 작성하기</h1>
-    <form action="/create-post" method="post">
+    <form action="writeOk.do" method="post">
       <label for="title">제목</label>
       <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required />
 

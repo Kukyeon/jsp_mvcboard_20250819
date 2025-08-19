@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>  
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,17 +12,17 @@
 </head>
 <body>
   <div class="detail-container">
-    <h2 class="detail-title">게시글 제목 예시</h2>
+    <h2 class="detail-title">${bDto.btitle }</h2>
 
     <div class="detail-info">
-      <span>작성자: <strong>관리자</strong></span>
-      <span>조회수: <strong>45</strong></span>
-      <span>작성일: <strong>2025-08-19</strong></span>
+      <span>작성자: <strong>${bDto.memberid }</strong></span>
+      <span>조회수: <strong>${bDto.bhit }</strong></span>
+      <span>작성일: <strong>${fn:substring(bDto.bdate, 0, 10)}</strong></span>
     </div>
 
     <div class="detail-content">
       <p>
-        여기에 게시글 내용이 들어갑니다. 여러 줄의 텍스트도 문제 없이 표시됩니다.
+        ${bDto.bcontent }
       </p>
     </div>
 

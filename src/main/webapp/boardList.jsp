@@ -13,9 +13,24 @@
   <link rel="stylesheet" href="css/boardStyle.css" />
 </head>
 <body>
-  <div class="board-container">
 
-    
+  <!-- 헤더 시작 -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">미완성 페이지</div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.do">HOME</a></li>
+          <li><a href="boardList.do">게시판</a></li>
+          <li><a href="contact.html">고객센터</a></li>
+          <li><a href="help.html">도움말</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- 헤더 끝 -->
+
+  <div class="board-container">
 
     <h2 class="board-title">게시판</h2>
 
@@ -27,8 +42,6 @@
           <th>작성자</th>
           <th>날짜</th>
           <th>조회수</th>
-          
-          
         </tr>
       </thead>
       <tbody>
@@ -36,22 +49,20 @@
         <tr>
           <td>${bDto.bnum }</td>
           <td>
-          <c:choose>
-          <c:when test="${fn:length(boardDto.btitle) > 15}">
-          <a href="#" class="post-link">${fn:substring(bDto.btitle, 0, 15)}...</a>
-          </c:when>
-          <c:otherwise>
-          	${fn:substring(bDto.btitle, 0, 15)}
-          </c:otherwise>
-          </c:choose>
+            <c:choose>
+              <c:when test="${fn:length(bDto.btitle) > 15}">
+                <a href="content.do?bnum=${bDto.bnum }" class="post-link">${fn:substring(bDto.btitle, 0, 15)}...</a>
+              </c:when>
+              <c:otherwise>
+                <a href="content.do?bnum=${bDto.bnum }" class="post-link">${bDto.btitle}</a>
+              </c:otherwise>
+            </c:choose>
           </td>
           <td>${bDto.memberid }</td>
           <td>${fn:substring(bDto.bdate, 0, 10)}</td>
           <td>${bDto.bhit }</td>
-          
        </tr>
-       </c:forEach>
-       
+      </c:forEach>
       </tbody>
     </table>
 
@@ -60,5 +71,22 @@
       <a href="index.jsp" class="write-btn">메인으로</a>
     </div>
   </div>
+
+  <!-- 푸터 시작 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <p>© 2025 MySite. All Rights Reserved.</p>
+        <p>주소: 서울특별시 강남구 테헤란로 123 | 전화: 02-1234-5678 | 이메일: contact@mysite.com</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a> | 
+        <a href="terms.html">이용약관</a> | 
+        <a href="sitemap.html">사이트맵</a>
+      </div>
+    </div>
+  </footer>
+  <!-- 푸터 끝 -->
+
 </body>
 </html>

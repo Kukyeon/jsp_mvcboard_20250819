@@ -67,7 +67,17 @@ public class BoardController extends HttpServlet {
 		}else if(comm.equals("/delete.do")) { // 글삭제 후 글목록으로
 			viewPage = "boardList.do";
 		}else if(comm.equals("/content.do")) { // 게시판에서 게시글 페이지로 이동
+			String bnum = request.getParameter("bnum");
+			BoardDto bDto = boardDao.contentView(bnum);
+			request.setAttribute("bDto", bDto);
 			viewPage = "contentView.jsp";
+		}else if(comm.equals("/writeOk.do")) {
+			request.setCharacterEncoding("utf-8");
+			String btitle = request.getParameter("title"); //  유저가 입력한 글 제목
+			String bcontent = request.getParameter("content");
+			String memberid = request.getParameter("author"); // 작성자
+			boardDao.boardWrite(btitle, bcontent, memberid);
+			viewPage = "boardList.do";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
