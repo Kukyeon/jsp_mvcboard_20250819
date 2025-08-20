@@ -10,6 +10,12 @@
 </head>
 <body>
 
+<%
+  if (request.getAttribute("error") != null) {
+   
+    out.println("<script>alert('수정 또는 삭제 권한이 없습니다.'); window.location.href='history.go(-1)';</script>");
+  }
+%>
   <div class="edit-container">
     <h1 class="edit-title">게시글 수정</h1>
     <form action="modifyOk.do" method="post">

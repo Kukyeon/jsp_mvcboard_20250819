@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kkuk.dto.BoardDto;
+import com.kkuk.dto.BoardMemberDto;
+import com.kkuk.dto.MemberDto;
 
 public class BoardDao {
 
@@ -27,11 +29,13 @@ public class BoardDao {
 	
 	
 	
-	public List<BoardDto> boardList() { // 게시판의 모든 글 리스트 가져와서 반환 하기
-		
-		String sql = "SELECT * FROM board ORDER BY bnum DESC";
+		public List<BoardDto> boardList() { // 게시판의 모든 글 리스트 가져와서 반환 하기
+		String sql = "SELECT b.bnum, b.btitle, b.content, b.memberid, m.memberemail, b.bdate, b.bhit "
+				+ "FROM board b INNER JOIN members m ON b.memberid = m.memberid ORDER BY bnum DESC";
+		// members 테이블과 board 테이블의 조인 sql문
+		//String sql = "SELECT * FROM board ORDER BY bnum DESC";
+		//List<BoardMemberDto> bmDtos = new ArrayList<BoardMemberDto>();
 		List<BoardDto> bDtos = new ArrayList<BoardDto>();
-		
 		int sqlResult = 0;
 		
 		try{ // 에러 날 가능성이 높기때문에 예외처리 필수 트라이 캣치
@@ -51,9 +55,16 @@ public class BoardDao {
 				String memberid = rs.getString("memberid");
 				int bhit = rs.getInt("bhit");
 				String bdate = rs.getString("bdate");
+				String memberemail = rs.getString("memberemail");
 				
-				BoardDto bDto = new BoardDto(bnum, btitle, bcontent, memberid, bhit, bdate);
+				MemberDto memberDto = new MemberDto();
+				memberDto.setMemberid(memberid);
+				memberDto.setMemberemail(memberemail);
+				
+				BoardDto bDto = new BoardDto(bnum, btitle, bcontent, memberid, bhit, bdate, memberDto);
 				bDtos.add(bDto);
+				//BoardMemberDto bmDto = new BoardMemberDto(bnum, btitle, bcontent, memberid, memberemail, bhit, bdate);
+				//bDtos.add(bmDto);
 			}
 			
 		} catch (Exception e) {

@@ -36,11 +36,14 @@
 
   <div class="detail-buttons">
     <a href="boardList.do" class="btn btn-list">목록으로</a>
+    
+    <c:if test="${sessionScope.sessionId == bDto.memberid }">
     <a href="modify.do?bnum=${bDto.bnum}" class="btn btn-edit">수정하기</a>
-
     <form action="delete.do" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="display:inline;">
       <input type="hidden" name="bnum" value="${bDto.bnum}" />
       <button type="submit" class="btn btn-delete">삭제하기</button>
+      </c:if>
+      
     </form>
   </div>
 </div>

@@ -36,6 +36,7 @@
           <th>번호</th>
           <th>제목</th>
           <th>작성자</th>
+          <th>이메일</th>
           <th>날짜</th>
           <th>조회수</th>
         </tr>
@@ -55,6 +56,7 @@
             </c:choose>
           </td>
           <td>${bDto.memberid }</td>
+          <td>${bDto.member.memberemail }</td>
           <td>${fn:substring(bDto.bdate, 0, 10)}</td>
           <td>${bDto.bhit }</td>
        </tr>

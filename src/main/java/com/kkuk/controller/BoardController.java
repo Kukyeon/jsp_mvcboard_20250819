@@ -15,6 +15,7 @@ import java.util.List;
 import com.kkuk.dao.BoardDao;
 import com.kkuk.dao.MemberDao;
 import com.kkuk.dto.BoardDto;
+import com.kkuk.dto.BoardMemberDto;
 
 
 @WebServlet("*.do")
@@ -51,13 +52,15 @@ public class BoardController extends HttpServlet {
 		String comm = uri.substring(conPath.length());
 		System.out.println("comm = "+comm);
 		
-		String viewPage = ""; // 실제 클라이언트에게 전송 될 jsp파일의 이름이 저장될 변수
-		
+		String viewPage = ""; // 실제 클라이언트에게 전송 될 jsp파일의 이름이 저장될 변thu
 		HttpSession session = null;
-		
 		BoardDao boardDao = new BoardDao();
+		List<BoardMemberDto> bmDtos = new ArrayList<BoardMemberDto>(); 
 		List<BoardDto> bDtos = new ArrayList<BoardDto>();
 		MemberDao memberDao = new MemberDao();
+		
+		
+		
 		if(comm.equals("/boardList.do")) { // 게시판 모든 글 목록 보기 요청
 			bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
 			request.setAttribute("bDtos", bDtos);
@@ -73,10 +76,20 @@ public class BoardController extends HttpServlet {
 			}
 			
 		}else if(comm.equals("/modify.do")) { // 글 수정
+			session = request.getSession();
+			String sid = (String)session.getAttribute("sessionId");
 			String bnum = request.getParameter("bnum"); // 수정하려고하는 글의 번호
 			BoardDto bDto = boardDao.contentView(bnum); // 수정하려고 하는 글의 레코드 가져오기
-			request.setAttribute("bDto", bDto); // 싣고 보내주기
-			viewPage = "modifyForm.jsp";
+			
+			if(bDto.getMemberid().equals(sid)) {
+				request.setAttribute("bDto", bDto); // 싣고 보내주기
+				viewPage = "modifyForm.jsp";
+			}else {
+				response.sendRedirect("modifyForm.jsp?error=1");
+				return;
+			}
+			
+			
 		}else if(comm.equals("/modifyOk.do")) { // 글 수정후 글 내용보기로 이동
 			
 			request.setCharacterEncoding("utf-8");
@@ -92,10 +105,19 @@ public class BoardController extends HttpServlet {
 			viewPage = "contentView.jsp";
 			
 		}else if(comm.equals("/delete.do")) { // 글삭제 후 글목록으로
-			String bnum = request.getParameter("bnum");
+			String bnum = request.getParameter("bnum"); //유저가 삭제할 글의 번호
+			session = request.getSession();
+			String sid = (String) session.getAttribute("sessionId");
 			
-			boardDao.boardDelete(bnum);
+			BoardDto boardDto = boardDao.contentView(bnum); //수정하려고 하는 글 가져오기
 			
+			if(boardDto.getMemberid().equals(sid)) { //참이면 수정, 삭제 가능
+				boardDao.boardDelete(bnum); //해당 글 번호 삭제 메서드 호출				
+				viewPage = "boardList.do";
+			} else {
+				response.sendRedirect("modifyForm.jsp?error=1");
+				return;
+			}
 			viewPage = "boardList.do";
 		}else if(comm.equals("/content.do")) { // 게시판에서 게시글 페이지로 이동
 			String bnum = request.getParameter("bnum");
