@@ -22,7 +22,7 @@
       <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
 
       <label for="author">작성자</label>
-      <input type="text" id="author" name="author" placeholder="작성자 이름" required />
+      <input type="text" id="author" name="author" value="${sessionScope.sessionId }" readonly="readonly" />
 
       <div class="button-group">
         <button type="submit" class="submit-btn">작성 완료</button>
