@@ -30,8 +30,9 @@ public class BoardDao {
 	
 	
 		public List<BoardDto> boardList() { // 게시판의 모든 글 리스트 가져와서 반환 하기
-		String sql = "SELECT b.bnum, b.btitle, b.bcontent, b.memberid, m.memberemail, b.bdate, b.bhit "
-				+ "FROM board b INNER JOIN members m ON b.memberid = m.memberid ORDER BY bnum DESC";
+		String sql = "SELECT ROW_NUMBER() OVER (ORDER BY bnum DESC) AS bno, "
+				+ "b.bnum, b.btitle, b.bcontent, b.memberid, m.memberemail, b.bdate, b.bhit "
+				+ "FROM board b INNER JOIN members m ON b.memberid = m.memberid ORDER BY bno DESC";
 		// members 테이블과 board 테이블의 조인 sql문
 		//String sql = "SELECT * FROM board ORDER BY bnum DESC";
 		//List<BoardMemberDto> bmDtos = new ArrayList<BoardMemberDto>();
@@ -57,11 +58,13 @@ public class BoardDao {
 				String bdate = rs.getString("bdate");
 				String memberemail = rs.getString("memberemail");
 				
+				int bno = rs.getInt("bno");
+				
 				MemberDto memberDto = new MemberDto();
 				memberDto.setMemberid(memberid);
 				memberDto.setMemberemail(memberemail);
 				
-				BoardDto bDto = new BoardDto(bnum, btitle, bcontent, memberid, bhit, bdate, memberDto);
+				BoardDto bDto = new BoardDto(bno, bnum, btitle, bcontent, memberid, bhit, bdate, memberDto);
 				bDtos.add(bDto);
 				//BoardMemberDto bmDto = new BoardMemberDto(bnum, btitle, bcontent, memberid, memberemail, bhit, bdate);
 				//bDtos.add(bmDto);

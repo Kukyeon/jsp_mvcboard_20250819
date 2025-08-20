@@ -44,7 +44,7 @@
       <tbody>
       <c:forEach items="${bDtos}" var="bDto" varStatus="status">
         <tr>
-          <td>${bDto.bnum }</td>
+          <td>${bDto.bno }</td>
           <td>
             <c:choose>
               <c:when test="${fn:length(bDto.btitle) > 15}">

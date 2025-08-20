@@ -1,7 +1,8 @@
 package com.kkuk.dto;
 
 public class BoardDto {
-
+	
+	private int bno; // 새로운 글 게시판 번호
 	private int bnum; // 글 순서
 	private String btitle; // 글 제목
 	private String bcontent; // 글 내용
@@ -11,28 +12,10 @@ public class BoardDto {
 	
 	private MemberDto member; // 회원정보 클래스로 선언한 객체를 멤버변수를 영입
 
-	public BoardDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-
-	public BoardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate) {
-		super();
-		this.bnum = bnum;
-		this.btitle = btitle;
-		this.bcontent = bcontent;
-		this.memberid = memberid;
-		this.bhit = bhit;
-		this.bdate = bdate;
-	}
-
-
-
-	public BoardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate,
+	public BoardDto(int bno, int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate,
 			MemberDto member) {
 		super();
+		this.bno = bno;
 		this.bnum = bnum;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
@@ -40,6 +23,14 @@ public class BoardDto {
 		this.bhit = bhit;
 		this.bdate = bdate;
 		this.member = member;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 
 	public int getBnum() {
@@ -97,6 +88,17 @@ public class BoardDto {
 	public void setMember(MemberDto member) {
 		this.member = member;
 	}
+
+	public BoardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate) {
+		super();
+		this.bnum = bnum;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.memberid = memberid;
+		this.bhit = bhit;
+		this.bdate = bdate;
+	}
+
 	
 	
 	
