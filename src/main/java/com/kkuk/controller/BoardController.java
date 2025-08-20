@@ -63,14 +63,37 @@ public class BoardController extends HttpServlet {
 		}else if(comm.equals("/write.do")) { // 글쓰기
 			viewPage = "write.jsp";	
 		}else if(comm.equals("/modify.do")) { // 글 수정
-			viewPage = "modifyForm.jsp";	
+			String bnum = request.getParameter("bnum"); // 수정하려고하는 글의 번호
+			BoardDto bDto = boardDao.contentView(bnum); // 수정하려고 하는 글의 레코드 가져오기
+			request.setAttribute("bDto", bDto); // 싣고 보내주기
+			viewPage = "modifyForm.jsp";
+		}else if(comm.equals("/modifyOk.do")) { // 글 수정후 글 내용보기로 이동
+			
+			request.setCharacterEncoding("utf-8");
+			
+			String bnum = request.getParameter("bnum");
+			String btitle = request.getParameter("title"); //  유저가 수정한 글 제목
+			String bcontent = request.getParameter("content"); // 수정하려는 글 내용
+			String memberid = request.getParameter("author"); // 수정 작성자
+			
+			boardDao.boardUpdate(bnum, btitle, bcontent);
+			BoardDto bDto = boardDao.contentView(bnum); // 수정한 글 번호로 수정한 글 다시 가져오기
+			request.setAttribute("bDto", bDto);
+			viewPage = "contentView.jsp";
+			
 		}else if(comm.equals("/delete.do")) { // 글삭제 후 글목록으로
+			String bnum = request.getParameter("bnum");
+			
+			boardDao.boardDelete(bnum);
+			
 			viewPage = "boardList.do";
 		}else if(comm.equals("/content.do")) { // 게시판에서 게시글 페이지로 이동
 			String bnum = request.getParameter("bnum");
 			BoardDto bDto = boardDao.contentView(bnum);
 			if(bDto == null) { // 선택한 글이 db에 존재하지 않는경우,( 클릭과 동시에 삭제 된 경우)
 				request.setAttribute("msg", "존재하지 않는 글입니다.");
+				//response.sendRedirect("contentView.jsp?msg=해당글은존재하지않습니다.");;
+				//return;
 			}
 			request.setAttribute("bDto", bDto);
 			viewPage = "contentView.jsp";
@@ -82,7 +105,10 @@ public class BoardController extends HttpServlet {
 			boardDao.boardWrite(btitle, bcontent, memberid);
 			response.sendRedirect("boardList.do"); // 포워딩을 하지않고 강제로 이동
 			return; // 프로그램의 진행 멈춤
-		} else {
+		}else if(comm.equals("/login.do")) {
+			
+		}	else {
+		
 			viewPage = "index.jsp";
 		}
 		

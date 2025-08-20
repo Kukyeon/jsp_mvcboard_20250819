@@ -17,7 +17,7 @@
           <li><a href="index.do">HOME</a></li>
           <li><a href="boardList.do">게시판</a></li>
           <li><a href="contact.html">고객센터</a></li>
-          <li><a href="help.html">도움말</a></li>
+          <li><a href="login.do">로그인</a></li>
         </ul>
       </nav>
     </div>

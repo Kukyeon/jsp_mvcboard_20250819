@@ -11,22 +11,22 @@
 <body>
   <div class="edit-container">
     <h1 class="edit-title">게시글 수정</h1>
-    <form action="/update-post" method="post">
+    <form action="modifyOk.do" method="post">
       <!-- 게시글 고유 ID 숨김 -->
-      <input type="hidden" name="postId" value="123" />
+      <input type="hidden" name="bnum" value="${bDto.bnum }" />
 
       <label for="title">제목</label>
-      <input type="text" id="title" name="title" value="기존 게시글 제목" required />
+      <input type="text" id="title" name="title" value="${bDto.btitle} " required />
 
       <label for="content">내용</label>
-      <textarea id="content" name="content" rows="10" required>기존 게시글 내용</textarea>
+      <textarea id="content" name="content" rows="10" required>${bDto.bcontent }</textarea>
 
       <label for="author">작성자</label>
-      <input type="text" id="author" name="author" value="관리자" required />
+      <input type="text" id="author" name="author" value="${bDto.memberid }" required />
 
       <div class="button-group">
         <button type="submit" class="save-btn">저장</button>
-        <a href="contentView.jsp" class="cancel-btn">취소</a>
+        <a href="javascript:history.go(-1)" class="cancel-btn">취소</a>
       </div>
     </form>
   </div>

@@ -4,15 +4,23 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #121212;
-  color: #c0c0c0; /* 톤다운된 기본 글자색 */
+  color: #c0c0c0;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  flex-grow: 1;
 }
 
 /* 헤더 고정 */
@@ -42,7 +50,7 @@ body {
 .logo {
   font-size: 24px;
   font-weight: 700;
-  color: #5588cc; /* 톤다운 블루 */
+  color: #5588cc;
   user-select: none;
 }
 
@@ -55,7 +63,7 @@ body {
 }
 
 .nav-menu ul li a {
-  color: #999;  /* 톤다운된 메뉴 글자색 */
+  color: #999;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
@@ -65,7 +73,7 @@ body {
 
 .nav-menu ul li a:hover,
 .nav-menu ul li a:focus {
-  color: #5588cc; /* 톤다운 블루 */
+  color: #5588cc;
   background-color: #333;
 }
 
@@ -86,20 +94,20 @@ body {
 .intro-section h1 {
   font-size: 42px;
   margin-bottom: 20px;
-  color: #7a9cd9; /* 톤다운된 파란색 */
+  color: #7a9cd9;
 }
 
 .intro-section p {
   font-size: 18px;
   margin-bottom: 30px;
-  color: #888; /* 톤다운된 회색 */
+  color: #888;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .btn-primary {
-  background-color: #2566c3; /* 톤다운된 파란색 */
+  background-color: #2566c3;
   color: white;
   padding: 14px 36px;
   font-size: 18px;
@@ -110,7 +118,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #1b4f8e; /* 진해진 파란색 */
+  background-color: #1b4f8e;
 }
 
 /* 주요 기능 섹션 */
@@ -118,7 +126,7 @@ body {
   text-align: center;
   font-size: 32px;
   margin-bottom: 40px;
-  color: #7a9cd9; /* 톤다운된 파란색 */
+  color: #7a9cd9;
 }
 
 .features {
@@ -140,28 +148,27 @@ body {
 }
 
 .feature-item h3 {
-  color: #5588cc; /* 톤다운된 파란색 */
+  color: #5588cc;
   margin-bottom: 15px;
   font-size: 22px;
 }
 
 .feature-item p {
-  color: #999; /* 톤다운된 회색 */
+  color: #999;
   font-size: 15px;
   line-height: 1.4;
 }
 
-/* 푸터 고정 */
+/* 푸터 자연스러운 위치 (고정 아님) */
 .footer {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   background: linear-gradient(90deg, #1a1a1a 0%, #222 100%);
   border-top: 2px solid #333;
-  color: #777; /* 톤다운된 회색 */
+  color: #777;
   font-size: 14px;
   user-select: none;
   box-shadow: 0 -2px 10px rgba(0,0,0,0.8);
+  margin-top: auto; /* 푸터를 아래로 밀어냄 */
 }
 
 .footer-container {
@@ -179,7 +186,7 @@ body {
 }
 
 .footer-links a {
-  color: #555; /* 톤다운된 회색 */
+  color: #555;
   text-decoration: none;
   margin-left: 12px;
   font-weight: 600;
@@ -187,7 +194,7 @@ body {
 }
 
 .footer-links a:hover {
-  color: #5588cc; /* 톤다운된 파란색 */
+  color: #5588cc;
 }
 
 /* 반응형 */
