@@ -52,6 +52,7 @@ public class BoardController extends HttpServlet {
 		System.out.println("comm = "+comm);
 		
 		String viewPage = ""; // 실제 클라이언트에게 전송 될 jsp파일의 이름이 저장될 변수
+		
 		HttpSession session = null;
 		
 		BoardDao boardDao = new BoardDao();
@@ -62,7 +63,15 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("bDtos", bDtos);
 			viewPage = "boardList.jsp";
 		}else if(comm.equals("/write.do")) { // 글쓰기
-			viewPage = "write.jsp";	
+			session = request.getSession();
+			String sid = (String)session.getAttribute("sessionId");
+			if(sid != null) {
+				viewPage = "write.jsp";
+			}else {
+				response.sendRedirect("login.do?msg=2");
+				return;
+			}
+			
 		}else if(comm.equals("/modify.do")) { // 글 수정
 			String bnum = request.getParameter("bnum"); // 수정하려고하는 글의 번호
 			BoardDto bDto = boardDao.contentView(bnum); // 수정하려고 하는 글의 레코드 가져오기
@@ -115,8 +124,8 @@ public class BoardController extends HttpServlet {
 			
 			int loginFlag = memberDao.loginCheck(loginId, loginPw); // 성공이면 1, 실패면 0
 			if(loginFlag == 1) {
-				HttpSession session1 = request.getSession();
-				session1.setAttribute("sessionId", loginId);
+				session = request.getSession();
+				session.setAttribute("sessionId", loginId);
 			}else {
 				response.sendRedirect("login.do?msg=1");
 				return;
