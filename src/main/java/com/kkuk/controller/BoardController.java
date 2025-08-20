@@ -82,6 +82,8 @@ public class BoardController extends HttpServlet {
 			boardDao.boardWrite(btitle, bcontent, memberid);
 			response.sendRedirect("boardList.do"); // 포워딩을 하지않고 강제로 이동
 			return; // 프로그램의 진행 멈춤
+		} else {
+			viewPage = "index.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
