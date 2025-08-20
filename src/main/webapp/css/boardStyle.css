@@ -1,9 +1,10 @@
 @charset "UTF-8";
-/* 전체 기본 스타일 */
+
+/* 기본 스타일 */
 body {
   margin: 0;
-  padding-top: 60px;    /* 헤더 높이 */
-  padding-bottom: 20px; /* 푸터 높이만큼 여백 줌 */
+  padding-top: 60px;
+  padding-bottom: 20px;
   background-color: #121212;
   color: #ddd;
   font-family: "맑은 고딕", Malgun Gothic, sans-serif;
@@ -13,7 +14,7 @@ body {
   flex-direction: column;
 }
 
-/* 헤더 고정 */
+/* 헤더 */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -50,10 +51,6 @@ body {
   align-items: center;
 }
 
-.nav-menu ul li {
-  position: relative;
-}
-
 .nav-menu ul li a {
   color: #5588cc;
   text-decoration: none;
@@ -64,29 +61,7 @@ body {
   text-decoration: underline;
 }
 
-/* 글쓰기 버튼을 게시판 메뉴 옆에 inline으로 배치 */
-.board-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.write-btn-inline {
-  padding: 6px 12px;
-  background-color: #5588cc;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  transition: background-color 0.3s ease;
-}
-
-.write-btn-inline:hover {
-  background-color: #4477bb;
-}
-
-/* 게시판 컨테이너 중앙 정렬 */
+/* 게시판 컨테이너 */
 .board-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -94,19 +69,44 @@ body {
   background-color: #222;
   border-radius: 8px;
   box-shadow: 0 0 10px #5588cc;
-  flex-grow: 1; /* body 내에서 공간 늘려 푸터 아래 붙게 */
+  flex-grow: 1;
 }
 
 /* 게시판 제목 */
 .board-title {
-  text-align: center;
   color: #cce;
-  margin-bottom: 20px;
   font-size: 1.5rem;
   font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-/* 게시판 테이블 스타일 */
+/* 글쓰기 버튼 영역 */
+.write-btn-top-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+/* 글쓰기 버튼 스타일 */
+.write-btn-top {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #5588cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.write-btn-top:hover {
+  background-color: #4477bb;
+}
+
+/* 게시판 테이블 */
 .board-table {
   width: 100%;
   border-collapse: collapse;
@@ -140,7 +140,7 @@ body {
   text-decoration: underline;
 }
 
-/* 페이징 스타일 */
+/* 페이징 */
 .pagination {
   margin-top: 30px;
   text-align: center;
@@ -170,11 +170,8 @@ body {
   cursor: default;
 }
 
-/* 푸터 - 고정 삭제, 자연스러운 하단 배치 */
+/* 푸터 */
 .footer {
-  /* position: fixed; 삭제 */
-  /* bottom: 0; left: 0; right: 0; 삭제 */
-  height: auto; /* 높이 고정하지 않음 */
   background-color: #222;
   border-top: 1px solid #333;
   color: #777;

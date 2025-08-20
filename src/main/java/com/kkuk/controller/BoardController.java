@@ -106,7 +106,10 @@ public class BoardController extends HttpServlet {
 			response.sendRedirect("boardList.do"); // 포워딩을 하지않고 강제로 이동
 			return; // 프로그램의 진행 멈춤
 		}else if(comm.equals("/login.do")) {
+			viewPage = "login.jsp";
+		}else if(comm.equals("/loginOk.do")) {
 			
+			viewPage = "boardList.do";
 		}	else {
 		
 			viewPage = "index.jsp";

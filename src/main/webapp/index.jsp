@@ -9,19 +9,7 @@
   <link rel="stylesheet" href="css/index_style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="header-container">
-      <div class="logo">미완성 페이지</div>
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="index.do">HOME</a></li>
-          <li><a href="boardList.do">게시판</a></li>
-          <li><a href="contact.html">고객센터</a></li>
-          <li><a href="login.do">로그인</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<jsp:include page="header.jsp" />
 
   <main class="main-content">
     <section class="intro-section">
@@ -55,18 +43,6 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-info">
-        <p>© 2025 MySite. All Rights Reserved.</p>
-        <p>주소: 서울특별시 강남구 테헤란로 123 | 전화: 02-1234-5678 | 이메일: contact@mysite.com</p>
-      </div>
-      <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a> | 
-        <a href="terms.html">이용약관</a> | 
-        <a href="sitemap.html">사이트맵</a>
-      </div>
-    </div>
-  </footer>
+ <jsp:include page="footer.jsp" />
 </body>
 </html>

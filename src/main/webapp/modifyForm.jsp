@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/modifyformStyle.css" />
 </head>
 <body>
+<jsp:include page="header.jsp" />
   <div class="edit-container">
     <h1 class="edit-title">게시글 수정</h1>
     <form action="modifyOk.do" method="post">
@@ -29,6 +30,8 @@
         <a href="javascript:history.go(-1)" class="cancel-btn">취소</a>
       </div>
     </form>
+    
   </div>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>
