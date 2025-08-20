@@ -30,7 +30,7 @@ public class BoardDao {
 	
 	
 		public List<BoardDto> boardList() { // 게시판의 모든 글 리스트 가져와서 반환 하기
-		String sql = "SELECT b.bnum, b.btitle, b.content, b.memberid, m.memberemail, b.bdate, b.bhit "
+		String sql = "SELECT b.bnum, b.btitle, b.bcontent, b.memberid, m.memberemail, b.bdate, b.bhit "
 				+ "FROM board b INNER JOIN members m ON b.memberid = m.memberid ORDER BY bnum DESC";
 		// members 테이블과 board 테이블의 조인 sql문
 		//String sql = "SELECT * FROM board ORDER BY bnum DESC";
@@ -251,5 +251,39 @@ public class BoardDao {
 				}
 			}
 		
-}
+		}
+		
+		public void updateBhit(String bnum) {
+			String sql ="UPDATE board SET bhit=bhit+1 WHERE bnum=?"; // 조회수가 1 씩 늘어나는 sql 문
+			
+
+			try{ // 에러 날 가능성이 높기때문에 예외처리 필수 트라이 캣치
+				Class.forName(driverName); // MySQL 드라이버 클래스 불러오기
+				conn = DriverManager.getConnection(url, username, password);
+				//conn 커넥션이 메모리에 생성이됨 (DB와의 연결 커넥션 conn 생성)
+				// stmt = conn.createStatement(); // stmt 객체 생성
+				pstmt = conn.prepareStatement(sql); // pstmt 객체 생성
+				
+				pstmt.setString(1, bnum);
+				
+				pstmt.executeUpdate(); // 성공시 sqlResult 값이 1로 변환
+				
+				
+			} catch (Exception e) {
+				System.out.println("DB 에러 조회수 수정 실패");
+				e.printStackTrace(); // 에러 내용 출력
+			} finally { // 에러 발생 여부와 상관없이 커넥션 닫아줘야함
+				try{
+					if(pstmt != null){ // stmt가 null 아니면 닫기 (conn 보다 먼저 실행되어야함)
+						pstmt.close();
+					}
+					if(conn != null){ // 커넥션이 null이 아닐때만 닫기
+						conn.close();
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+		}
 }
