@@ -118,9 +118,9 @@ public class BoardDao {
 		
 	}
 	
-	public BoardDto contentView(String bnum) {
+	public BoardDto contentView(String boardnum) {
 		String sql = "SELECT * FROM board WHERE bnum = ? ";
-		BoardDto boardDto = new BoardDto();
+		BoardDto boardDto = null;
 		
 		try{ // 에러 날 가능성이 높기때문에 예외처리 필수 트라이 캣치
 			Class.forName(driverName); // MySQL 드라이버 클래스 불러오기
@@ -129,21 +129,22 @@ public class BoardDao {
 			// stmt = conn.createStatement(); // stmt 객체 생성
 			
 			pstmt = conn.prepareStatement(sql); // pstmt 객체 생성
-			pstmt.setString(1, bnum);
+			pstmt.setString(1, boardnum);
 			
 			rs = pstmt.executeQuery();
 			
 			
-			if(rs.next()) { 
-				boardDto.setBnum(rs.getInt("bnum"));
-				boardDto.setBtitle(rs.getString("btitle"));
-				boardDto.setBcontent(rs.getString("bcontent"));
-				boardDto.setMemberid(rs.getString("memberid"));
-				boardDto.setBhit(rs.getInt("bhit"));
-				boardDto.setBdate(rs.getString("bdate"));
+			while(rs.next()) { 
+				int bnum = rs.getInt("bnum");
+				String btitle = rs.getString("btitle");
+				String bcontent = rs.getString("bcontent");
+				String memberid = rs.getString("memberid");
+				int bhit = rs.getInt("bhit");
+				String bdate = rs.getString("bdate");
 			
-				
-			}
+				boardDto = new BoardDto(bnum, btitle, bcontent, memberid, bhit, bdate);
+			}	
+			
 			
 		} catch (Exception e) {
 			System.out.println("DB 에러 아이디 존재 여부 체크 실패");
