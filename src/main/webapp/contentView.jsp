@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp" />
+
 
 <%
   if (request.getAttribute("msg") != null) {
@@ -45,7 +45,7 @@
   </div>
 </div>
 
-<jsp:include page="footer.jsp" />
+
 
 </body>
 </html>

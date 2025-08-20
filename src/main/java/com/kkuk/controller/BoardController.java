@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kkuk.dao.BoardDao;
+import com.kkuk.dao.MemberDao;
 import com.kkuk.dto.BoardDto;
 
 
@@ -55,7 +56,7 @@ public class BoardController extends HttpServlet {
 		
 		BoardDao boardDao = new BoardDao();
 		List<BoardDto> bDtos = new ArrayList<BoardDto>();
-		
+		MemberDao memberDao = new MemberDao();
 		if(comm.equals("/boardList.do")) { // 게시판 모든 글 목록 보기 요청
 			bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
 			request.setAttribute("bDtos", bDtos);
@@ -108,11 +109,22 @@ public class BoardController extends HttpServlet {
 		}else if(comm.equals("/login.do")) {
 			viewPage = "login.jsp";
 		}else if(comm.equals("/loginOk.do")) {
+			request.setCharacterEncoding("utf-8");
+			String loginId = request.getParameter("memberid");
+			String loginPw = request.getParameter("password");
+			
+			int loginFlag = memberDao.loginCheck(loginId, loginPw); // 성공이면 1, 실패면 0
+			if(loginFlag == 1) {
+				HttpSession session1 = request.getSession();
+				session1.setAttribute("sessionId", loginId);
+			}else {
+				response.sendRedirect("login.do?msg=1");
+				return;
+			}
 			
 			viewPage = "boardList.do";
 		}	else {
-		
-			viewPage = "index.jsp";
+		viewPage = "index.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

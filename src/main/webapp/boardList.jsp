@@ -21,7 +21,9 @@
 
     <!-- 게시판 제목 -->
     <h2 class="board-title">게시판</h2>
-
+    <c:if test="${not empty sessionScope.sessionId }">
+	<span style="color: gray;">${sessionScope.sessionId}로그인중</span>
+	</c:if>
     <!-- 글쓰기 버튼: 테이블 상단 우측 -->
     <div class="write-btn-top-container">
       <a href="write.do" class="write-btn-top">글쓰기</a>

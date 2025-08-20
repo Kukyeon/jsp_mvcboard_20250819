@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/write_style.css" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	
 	
 
   <div class="write-container">
@@ -30,6 +30,6 @@
       </div>
     </form>
   </div>
-  <jsp:include page="footer.jsp" />
+ 
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="jakarta.tags.core" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,6 +32,15 @@
       <a href="register.jsp">회원가입</a> | 
       <a href="forgotPassword.jsp">비밀번호 찾기</a>
     </div>
+    
+     <div class="login-links">
+      	<c:if test="${param.msg == 1}">
+      		<p style="color: red;">
+      			아이디 또는 비밀번호가 잘못 되었습니다.
+      		</p>
+      	</c:if>
+    </div>
+    
   </main>
 
   <!-- 푸터 -->
