@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="jakarta.tags.core" %>  
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %> 
+
+<%
+	
+	if(request.getAttribute("msg") != null){ // 웹 서블릿에서 넘겨준 값을 뺄때는 getattribute 사용
+		String msginfo = request.getAttribute("msg").toString();
+		out.println("<script>alert('"+msginfo+"');window.location.href='boardList.do';</script>");
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,6 +19,7 @@
   <link rel="stylesheet" href="css/detail_style.css" />
 </head>
 <body>
+
   <div class="detail-container">
     <h2 class="detail-title">${bDto.btitle }</h2>
 

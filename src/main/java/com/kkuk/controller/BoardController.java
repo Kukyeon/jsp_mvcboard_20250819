@@ -69,6 +69,11 @@ public class BoardController extends HttpServlet {
 		}else if(comm.equals("/content.do")) { // 게시판에서 게시글 페이지로 이동
 			String bnum = request.getParameter("bnum");
 			BoardDto bDto = boardDao.contentView(bnum);
+			
+			if(bDto == null) { // 선택한 글이 db에 존재하지 않는경우,( 클릭과 동시에 삭제 된 경우)
+				request.setAttribute("msg", "존재하지 않는 글입니다.");
+			}
+			
 			request.setAttribute("bDto", bDto);
 			viewPage = "contentView.jsp";
 		}else if(comm.equals("/writeOk.do")) {
