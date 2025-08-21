@@ -28,7 +28,15 @@
     <div class="write-btn-top-container">
       <a href="write.do" class="write-btn-top">글쓰기</a>
     </div>
-
+	<form action="boardList.do" method="get">
+		<select name="searchType">
+			<option value="btitle">제목</option>
+			<option value="bcontent">내용</option>
+			<option value="b.memberid">작성자</option>
+		</select>
+			<input type="text" name="searchKeyword" placeholder="검색어 입력">
+			<input type="submit" value="검색">
+	</form>
     <!-- 게시판 테이블 -->
     <table class="board-table">
       <thead>

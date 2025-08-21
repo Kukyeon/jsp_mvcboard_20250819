@@ -99,6 +99,18 @@ public class BoardDto {
 		this.bdate = bdate;
 	}
 
+	public BoardDto(int bnum, String btitle, String bcontent, String memberid, int bhit, String bdate,
+			MemberDto member) {
+		super();
+		this.bnum = bnum;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.memberid = memberid;
+		this.bhit = bhit;
+		this.bdate = bdate;
+		this.member = member;
+	}
+
 	
 	
 	

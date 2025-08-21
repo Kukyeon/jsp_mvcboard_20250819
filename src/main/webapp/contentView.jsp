@@ -26,6 +26,7 @@
 
   <div class="detail-info">
     <span>작성자: <strong>${bDto.memberid}</strong></span>
+    <span>이메일: <strong>${bDto.member.memberemail}</strong></span>
     <span>조회수: <strong>${bDto.bhit}</strong></span>
     <span>작성일: <strong>${fn:substring(bDto.bdate, 0, 10)}</strong></span>
   </div>
