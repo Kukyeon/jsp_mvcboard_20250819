@@ -20,7 +20,7 @@ import com.kkuk.dto.BoardMemberDto;
 
 @WebServlet("*.do")
 public class BoardController extends HttpServlet {
-
+	private static final int PAGE_GROUP_SIZE = 10;
        
 
 	
@@ -64,10 +64,36 @@ public class BoardController extends HttpServlet {
 		if(comm.equals("/boardList.do")) { // 게시판 모든 글 목록 보기 요청
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
+			
+			int page = 1;
+			// 게시판에 페이지 번호 없이 게시판 링크로 접근한 경우 무조건 1페이지의 내용이 출력되어야함
+						// 처음에 보여질 페이지의 번호의 초기값을 1로 초기화
+			if(request.getParameter("page") == null){ // 참이면 링크타고 게시판으로 들어온경우
+				page=1;
+			}else { // 유저가 보고싶은 페이지 번호를 누른경우
+				page = Integer.parseInt(request.getParameter("page"));
+				//유저가 클릭한 보고싶어하는 페이지의 번호
+			}
+			
+			List<BoardDto> boardDtos;
+			int totalBoardCount;
+			//int totalBoardCount = boardDao.countBoard(); // 총 글의 갯수
+			
 			if(searchType != null && searchKeyword != null && !searchKeyword.strip().isEmpty()) {// 유저가 검색 결과 리스트를 원하는 경우
-				bDtos = boardDao.searchBoardList(searchKeyword, searchType);
+				
+				totalBoardCount = boardDao.countSearchBoard(searchKeyword, searchType);
+				boardDtos = boardDao.searchBoardPage(searchKeyword, searchType, page);
 			}else { // 모든 게시판 글 리스트를 원하는 경우
-				bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
+				bDtos = boardDao.boardList(page); // 게시판에 모든 글이 포함된 arraylist 가 반환
+				totalBoardCount = boardDao.countBoard();
+		        bDtos = boardDao.boardPage(page);
+			}
+			
+			int totalPage = (int)Math.ceil((double)totalBoardCount / boardDao.PAGE_SIZE);
+			int startPage = (((page - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE) + 1; 
+			int endPage = startPage + PAGE_GROUP_SIZE - 1;
+			if(endPage > totalPage) {
+				endPage = totalPage;
 			}
 			
 			System.out.println("searchType = " + searchType);
@@ -75,7 +101,19 @@ public class BoardController extends HttpServlet {
 			
 			
 			// bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
-			request.setAttribute("bDtos", bDtos);
+			
+			
+			request.setAttribute("bDtos", bDtos); // 유저가 선택한 페이지에 해당하는 글
+			request.setAttribute("currentPage", page); // 유저가 현재 선택한 페이지 번호
+			request.setAttribute("totalPage", totalPage);
+			//총 글의 갯수로 표현될 전체 페이지의 수 (47개면 5개 전달)
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+		    request.setAttribute("searchType", searchType);        // 검색 유지용
+		    request.setAttribute("searchKeyword", searchKeyword);  // 검색 유지용
+			
+		    
+			
 			viewPage = "boardList.jsp";
 		}else if(comm.equals("/write.do")) { // 글쓰기
 			session = request.getSession();

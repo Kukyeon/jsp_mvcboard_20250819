@@ -73,30 +73,31 @@
     </table>
 
     <!-- 페이징 -->
-    <div class="pagination">
-      <c:set var="currentPage" value="${currentPage}" />
-      <c:set var="totalPages" value="${totalPages}" />
+    
+    <c:if test="${currentPage > 1}">
+  <a href="boardList.do?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">이이전</a>
+</c:if>
+<c:if test="${startPage > 1 }">
+  <a href="boardList.do?page=${startPage-1 }&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">이전</a>
+</c:if>
+    
+  <c:forEach begin="${startPage }" end="${endPage}" var="i">  
+  <c:choose>
+    <c:when test="${i == currentPage}">
+      <span class="page-link current">${i}</span>
+    </c:when>
+    <c:otherwise>
+      <a href="boardList.do?page=${i}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">${i}</a>
+    </c:otherwise>
+  </c:choose>
+</c:forEach>
 
-      <c:if test="${currentPage > 1}">
-        <a href="boardList.do?page=${currentPage - 1}" class="page-link">이전</a>
-      </c:if>
-
-      <c:forEach begin="1" end="${totalPages}" var="i">
-        <c:choose>
-          <c:when test="${i == currentPage}">
-            <span class="page-link current">${i}</span>
-          </c:when>
-          <c:otherwise>
-            <a href="boardList.do?page=${i}" class="page-link">${i}</a>
-          </c:otherwise>
-        </c:choose>
-      </c:forEach>
-
-      <c:if test="${currentPage < totalPages}">
-        <a href="boardList.do?page=${currentPage + 1}" class="page-link">다음</a>
-      </c:if>
-    </div>
-
+<c:if test="${currentPage < totalPage}">
+  <a href="boardList.do?page=${currentPage + 1}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다음</a>
+</c:if>
+<c:if test="${currentPage < totalPage}">
+  <a href="boardList.do?page=${totalPage}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다다음</a>
+</c:if>
   </div>
 
   <!-- 푸터 -->
