@@ -200,6 +200,7 @@ public class BoardDao {
 	}
 	
 	public BoardDto contentView(String boardnum) {
+		//String sql = "SELECT * FROM board WHERE bnum=?";
 		String sql = "SELECT b.bnum, b.btitle, b.bcontent, b.memberid, b.bhit, b.bdate,"
 				+ " m.memberemail FROM board b INNER JOIN members m ON b.memberid=m.memberid "
 				+ "WHERE b.bnum = ? ";

@@ -64,7 +64,7 @@ public class BoardController extends HttpServlet {
 		if(comm.equals("/boardList.do")) { // 게시판 모든 글 목록 보기 요청
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
-			if(searchType != null && searchKeyword != null && searchKeyword.strip().isEmpty()) {// 유저가 검색 결과 리스트를 원하는 경우
+			if(searchType != null && searchKeyword != null && !searchKeyword.strip().isEmpty()) {// 유저가 검색 결과 리스트를 원하는 경우
 				bDtos = boardDao.searchBoardList(searchKeyword, searchType);
 			}else { // 모든 게시판 글 리스트를 원하는 경우
 				bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
