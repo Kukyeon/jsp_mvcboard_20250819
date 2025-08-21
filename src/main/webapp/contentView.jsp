@@ -9,10 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>게시글 상세보기</title>
   <link rel="stylesheet" href="css/detail_style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+<link rel="stylesheet" href="css/footer.css" />
 </head>
 <body>
 
-
+  <!-- 헤더 시작 -->
+<jsp:include page="header.jsp" />
+  <!-- 헤더 끝 -->
 
 <%
   if (request.getAttribute("msg") != null) {
@@ -49,7 +53,8 @@
   </div>
 </div>
 
-
+ <!-- 푸터 -->
+<jsp:include page="footer.jsp" />
 
 </body>
 </html>

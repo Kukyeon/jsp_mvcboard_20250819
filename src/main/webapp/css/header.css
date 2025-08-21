@@ -1,0 +1,53 @@
+@charset "UTF-8";/* 헤더 고정 */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #1e1e1e;
+  border-bottom: 2px solid #333;
+  z-index: 1000;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #5588cc;
+  user-select: none;
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-menu ul li a {
+  color: #999;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.nav-menu ul li a:hover,
+.nav-menu ul li a:focus {
+  color: #5588cc;
+  background-color: #333;
+}

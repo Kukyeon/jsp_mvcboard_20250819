@@ -170,6 +170,16 @@ public class BoardController extends HttpServlet {
 			}
 			
 			viewPage = "boardList.do";
+		}else if(comm.equals("/logout.do")) {
+			 session = request.getSession(false);
+			    if (session != null) {
+			        session.invalidate(); // ✅ 세션 무효화 (로그아웃)
+			    }
+
+			    response.sendRedirect("index.do"); // ✅ 메인 페이지로 이동
+			    return;
+			
+			
 		}	else {
 		viewPage = "index.jsp";
 		}
