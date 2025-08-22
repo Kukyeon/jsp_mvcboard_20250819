@@ -20,3 +20,17 @@
     </nav>
   </div>
 </header>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const message = urlParams.get("message");
+  if (message === "login") {
+	    alert("로그인 되었습니다.");
+	  }
+  
+  if (message === "logout") {
+    alert("로그아웃 되었습니다.");
+  }
+  if (message) {
+	    window.history.replaceState({}, document.title, window.location.pathname);
+	  }
+</script>

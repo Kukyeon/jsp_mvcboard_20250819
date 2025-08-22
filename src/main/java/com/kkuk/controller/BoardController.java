@@ -203,19 +203,22 @@ public class BoardController extends HttpServlet {
 			if(loginFlag == 1) {
 				session = request.getSession();
 				session.setAttribute("sessionId", loginId);
+				response.sendRedirect("boardList.do?message=login");
+				return;
 			}else {
 				response.sendRedirect("login.do?msg=1");
 				return;
 			}
 			
-			viewPage = "boardList.do";
+			// viewPage = "boardList.do";
+			// 위에 로그인 성공,실패시 넘어가는 페이지가 있어서 굳이..? 필요없을듯
 		}else if(comm.equals("/logout.do")) {
 			 session = request.getSession(false);
 			    if (session != null) {
 			        session.invalidate(); // ✅ 세션 무효화 (로그아웃)
 			    }
 
-			    response.sendRedirect("index.do"); // ✅ 메인 페이지로 이동
+			    response.sendRedirect("index.do?message=logout"); // ✅ 메인 페이지로 이동
 			    return;
 			
 			

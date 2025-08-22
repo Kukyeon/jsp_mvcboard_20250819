@@ -13,12 +13,19 @@
 
   <main class="main-content">
     <section class="intro-section">
-      <h1>게시판만 이용가능</h1>
+      <h1>그냥저냥 어두컴컴한 홈페이지</h1>
       <p>
-        저희 홈페이지에 오신 것을 환영합니다! 다양한 정보와 게시판을 통해 소통하세요.
+        저희 홈페이지에 오신 것을 환영합니다! 이용 전 공지사항을 확인해주세세요.
       </p>
+      <a href="boardList.do" class="btn-primary">공지사항 바로가기</a>
+    </section>
+    <br><br><br><br><br><br>
+    <section class="intro-section">
+      <h3>원하시는 기능이 있으시다면 게시판에 요청해주세요</h3>
+      
       <a href="boardList.do" class="btn-primary">게시판 바로가기</a>
     </section>
+    
 
     
   </main>

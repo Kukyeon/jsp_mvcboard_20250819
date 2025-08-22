@@ -25,18 +25,20 @@
 	<span style="color: gray;">${sessionScope.sessionId}로그인중</span>
 	</c:if>
     <!-- 글쓰기 버튼: 테이블 상단 우측 -->
+    
     <div class="write-btn-top-container">
     <c:if test="${not empty sessionScope.sessionId}"> <!-- 로그인 한 사람만 글쓰기 버튼 표시 -->
      	<a href="write.do" class="write-btn-top">글쓰기</a>
     </c:if>
+   	 	<a href="boardList.do" class="write-btn-top">목록으로</a>
     </div>
 	<form action="boardList.do" method="get">
 		<select name="searchType">
-			<option value="btitle">제목</option>
-			<option value="bcontent">내용</option>
-			<option value="b.memberid">작성자</option>
+			<option value="btitle" ${searchType == 'btitle' ? 'selected' : '' }>제목</option>
+			<option value="bcontent"${searchType == 'bcontent' ? 'selected' : '' }>내용</option>
+			<option value="b.memberid"${searchType == 'b.memberid' ? 'selected' : '' }>작성자</option>
 		</select>
-			<input type="text" name="searchKeyword" placeholder="검색어 입력">
+			<input type="text" name="searchKeyword" value="${searchKeyword != null ? searchKeyword : ''}" placeholder="검색어 입력">
 			<input type="submit" value="검색">
 	</form>
     <!-- 게시판 테이블 -->
@@ -77,11 +79,11 @@
     <!-- 페이징 -->
     <!--  이전 페이지로 이동 -->
     <c:if test="${currentPage > 1}">
-  <a href="boardList.do?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}"
+  <a href="boardList.do?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}"
    class="page-link">이이전</a>
 </c:if>
 <c:if test="${startPage > 1 }">
-  <a href="boardList.do?page=${startPage-1 }&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}"
+  <a href="boardList.do?page=${startPage-1 }&searchType=${searchType}&searchKeyword=${searchKeyword}"
    class="page-link">이전</a>
 </c:if>
     <!--  이전 페이지로 이동  끝-->
@@ -93,7 +95,7 @@
       <span class="page-link current">${i}</span>
     </c:when>
     <c:otherwise>
-      <a href="boardList.do?page=${i}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">${i}</a>
+      <a href="boardList.do?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}" class="page-link">${i}</a>
     </c:otherwise>
   </c:choose>
 </c:forEach>
@@ -101,10 +103,10 @@
 
 <!--  다음 페이지로 이동 -->
 <c:if test="${endPage < totalPage}">
-  <a href="boardList.do?page=${endPage + 1}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다음</a>
+  <a href="boardList.do?page=${endPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}" class="page-link">다음</a>
 </c:if>
 <c:if test="${currentPage < totalPage}">
-  <a href="boardList.do?page=${totalPage}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다다음</a>
+  <a href="boardList.do?page=${totalPage}&searchType=${searchType}&searchKeyword=${searchKeyword}" class="page-link">다다음</a>
 </c:if>
   </div>
 <!--  다음 페이지로 이동 끝-->
