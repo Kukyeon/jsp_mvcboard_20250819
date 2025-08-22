@@ -66,7 +66,7 @@ public class BoardController extends HttpServlet {
 		if(comm.equals("/boardList.do")) { // 게시판 모든 글 목록 보기 요청
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
-			
+			int totalBoardCount = 0;
 			int page = 1;
 			// 게시판에 페이지 번호 없이 게시판 링크로 접근한 경우 무조건 1페이지의 내용이 출력되어야함
 						// 처음에 보여질 페이지의 번호의 초기값을 1로 초기화
@@ -77,18 +77,24 @@ public class BoardController extends HttpServlet {
 				//유저가 클릭한 보고싶어하는 페이지의 번호
 			}
 			
-			List<BoardDto> boardDtos;
-			int totalBoardCount;
+						
 			//int totalBoardCount = boardDao.countBoard(); // 총 글의 갯수
 			
 			if(searchType != null && searchKeyword != null && !searchKeyword.strip().isEmpty()) {// 유저가 검색 결과 리스트를 원하는 경우
+				bDtos = boardDao.searchBoardList(searchKeyword, searchType, 1);
+				if(!bDtos.isEmpty()) {
+					totalBoardCount = bDtos.get(0).getBno();
+				}
+				bDtos = boardDao.searchBoardList(searchKeyword, searchType, page);
 				
-				totalBoardCount = boardDao.countSearchBoard(searchKeyword, searchType);
-				boardDtos = boardDao.searchBoardPage(searchKeyword, searchType, page);
+				request.setAttribute("searchType", searchType);
+				request.setAttribute("searchKeyword", searchKeyword);
 			}else { // 모든 게시판 글 리스트를 원하는 경우
-				boardDtos = boardDao.boardList(page); // 게시판에 모든 글이 포함된 arraylist 가 반환
-				totalBoardCount = boardDao.countBoard();
-				boardDtos = boardDao.boardPage(page);
+				bDtos = boardDao.boardList(1); // 게시판에 모든 글이 포함된 arraylist 가 반환
+				if(!bDtos.isEmpty()) {
+					totalBoardCount = bDtos.get(0).getBno();
+				}	
+				bDtos = boardDao.boardList(page); //게시판 모든 글이 포함된 ArrayList 반환
 			}
 			
 			int totalPage = (int)Math.ceil((double)totalBoardCount / boardDao.PAGE_SIZE);
@@ -106,7 +112,7 @@ public class BoardController extends HttpServlet {
 			// bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
 			
 			
-			request.setAttribute("bDtos", boardDtos); // 유저가 선택한 페이지에 해당하는 글
+			request.setAttribute("bDtos", bDtos); // 유저가 선택한 페이지에 해당하는 글
 			request.setAttribute("currentPage", page); // 유저가 현재 선택한 페이지 번호
 			request.setAttribute("totalPage", totalPage); // 전체 페이지 수
 			//총 글의 갯수로 표현될 전체 페이지의 수 (47개면 5개 전달)
@@ -234,7 +240,9 @@ public class BoardController extends HttpServlet {
 			    return;
 			
 			
-		}	else {
+		}else if(comm.equals("/index.do")) {
+			viewPage = "index.jsp";
+			    }	else {
 		viewPage = "index.jsp";
 		}
 		

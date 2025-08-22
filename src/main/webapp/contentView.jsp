@@ -53,9 +53,9 @@
   </div>
 </div>
 
- <!-- 푸터 -->
+ <!-- 푸터 시작-->
 <jsp:include page="footer.jsp" />
-
+ <!-- 푸터 끝-->
 </body>
 </html>
 
