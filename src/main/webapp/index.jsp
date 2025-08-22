@@ -20,27 +20,7 @@
       <a href="boardList.do" class="btn-primary">게시판 바로가기</a>
     </section>
 
-    <section class="feature-section">
-      <h2>주요 기능</h2>
-      <div class="features">
-        <div class="feature-item">
-          <h3><a href="boardList.do">게시판</a></h3>
-          <p>손쉽게 글을 쓰고 읽을 수 있습니다.</p>
-        </div>
-        <div class="feature-item">
-          <h3>공지사항</h3>
-          <p>중요한 소식을 빠르게 확인하세요.</p>
-        </div>
-        <div class="feature-item">
-          <h3>고객 지원</h3>
-          <p>문의사항을 남기시면 빠르게 답변해드립니다.</p>
-        </div>
-        <div class="feature-item">
-          <h3>도움말</h3>
-          <p>서비스 이용에 필요한 도움말을 제공합니다.</p>
-        </div>
-      </div>
-    </section>
+    
   </main>
 
  <jsp:include page="footer.jsp" />

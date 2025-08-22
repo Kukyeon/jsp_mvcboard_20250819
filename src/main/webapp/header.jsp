@@ -8,7 +8,7 @@
       <ul>
         <li><a href="index.do">HOME</a></li>
         <li><a href="boardList.do">게시판</a></li>
-        <li><a href="contact.html">고객센터</a></li>
+        <li><a href="boardList.do">고객센터</a></li>
         
         <c:if test="${empty sessionScope.sessionId}">
         <li><a href="login.do">로그인</a></li>

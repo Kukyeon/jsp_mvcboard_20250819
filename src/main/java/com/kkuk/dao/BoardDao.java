@@ -226,18 +226,18 @@ public class BoardDao {
 	
 	public List<BoardDto> searchBoardPage(String searchKeyword, String searchType, int page) { //게시판 모든 글 리스트를 가져와서 반환하는 메서드
 		//String sql = "SELECT * FROM board ORDER BY bnum DESC";
-		int offset = (page - 1) * PAGE_SIZE;
-		String sql = "SELECT row_number() OVER (order by bnum ASC) AS bno,"
+		
+		String sql = "SELECT row_number() OVER (order by bnum ASC) AS bno, "
 				+ "b.bnum, b.btitle, b.bcontent, b.memberid, m.memberemail, b.bdate, b.bhit "
-				+ "FROM board b "
-				+ "INNER JOIN members m ON b.memberid = m.memberid"
+				+ " FROM board b "
+				+ " INNER JOIN members m ON b.memberid = m.memberid "
 				+ " WHERE " + searchType + " LIKE ? "
 				+ " ORDER BY bno DESC "
-				+ "LIMIT ? OFFSET ? ";
+				+ " LIMIT ? OFFSET ? ";
 		//members 테이블과 board 테이블의 조인 SQL문
 		//List<BoardMemberDto> bmDtos = new ArrayList<BoardMemberDto>();
 		List<BoardDto> bDtos = new ArrayList<BoardDto>();
-		
+		int offset = (page - 1) * PAGE_SIZE;
 		try {
 			Class.forName(driverName); //MySQL 드라이버 클래스 불러오기			
 			conn = DriverManager.getConnection(url, username, password);

@@ -84,16 +84,17 @@ public class BoardController extends HttpServlet {
 				totalBoardCount = boardDao.countSearchBoard(searchKeyword, searchType);
 				boardDtos = boardDao.searchBoardPage(searchKeyword, searchType, page);
 			}else { // 모든 게시판 글 리스트를 원하는 경우
-				bDtos = boardDao.boardList(page); // 게시판에 모든 글이 포함된 arraylist 가 반환
+				boardDtos = boardDao.boardList(page); // 게시판에 모든 글이 포함된 arraylist 가 반환
 				totalBoardCount = boardDao.countBoard();
-		        bDtos = boardDao.boardPage(page);
+				boardDtos = boardDao.boardPage(page);
 			}
 			
 			int totalPage = (int)Math.ceil((double)totalBoardCount / boardDao.PAGE_SIZE);
 			int startPage = (((page - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE) + 1; 
-			int endPage = startPage + PAGE_GROUP_SIZE - 1;
+			int endPage = startPage + (PAGE_GROUP_SIZE - 1);
 			if(endPage > totalPage) {
 				endPage = totalPage;
+				//totalPage 값을 실제 마지막 페이지로
 			}
 			
 			System.out.println("searchType = " + searchType);
@@ -103,12 +104,12 @@ public class BoardController extends HttpServlet {
 			// bDtos = boardDao.boardList(); // 게시판에 모든 글이 포함된 arraylist 가 반환
 			
 			
-			request.setAttribute("bDtos", bDtos); // 유저가 선택한 페이지에 해당하는 글
+			request.setAttribute("bDtos", boardDtos); // 유저가 선택한 페이지에 해당하는 글
 			request.setAttribute("currentPage", page); // 유저가 현재 선택한 페이지 번호
-			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("totalPage", totalPage); // 전체 페이지 수
 			//총 글의 갯수로 표현될 전체 페이지의 수 (47개면 5개 전달)
-			request.setAttribute("startPage", startPage);
-			request.setAttribute("endPage", endPage);
+			request.setAttribute("startPage", startPage); // 페이지 그룹 출력시 첫번째 페이지 번호
+			request.setAttribute("endPage", endPage); // 페이지 그룹 출력시 마지막 페이지 번호
 		    request.setAttribute("searchType", searchType);        // 검색 유지용
 		    request.setAttribute("searchKeyword", searchKeyword);  // 검색 유지용
 			

@@ -26,7 +26,9 @@
 	</c:if>
     <!-- 글쓰기 버튼: 테이블 상단 우측 -->
     <div class="write-btn-top-container">
-      <a href="write.do" class="write-btn-top">글쓰기</a>
+    <c:if test="${not empty sessionScope.sessionId}"> <!-- 로그인 한 사람만 글쓰기 버튼 표시 -->
+     	<a href="write.do" class="write-btn-top">글쓰기</a>
+    </c:if>
     </div>
 	<form action="boardList.do" method="get">
 		<select name="searchType">
@@ -73,14 +75,18 @@
     </table>
 
     <!-- 페이징 -->
-    
+    <!--  이전 페이지로 이동 -->
     <c:if test="${currentPage > 1}">
-  <a href="boardList.do?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">이이전</a>
+  <a href="boardList.do?page=1&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}"
+   class="page-link">이이전</a>
 </c:if>
 <c:if test="${startPage > 1 }">
-  <a href="boardList.do?page=${startPage-1 }&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">이전</a>
+  <a href="boardList.do?page=${startPage-1 }&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}"
+   class="page-link">이전</a>
 </c:if>
+    <!--  이전 페이지로 이동  끝-->
     
+    <!-- 그룹 선택 페이징 -->
   <c:forEach begin="${startPage }" end="${endPage}" var="i">  
   <c:choose>
     <c:when test="${i == currentPage}">
@@ -91,18 +97,21 @@
     </c:otherwise>
   </c:choose>
 </c:forEach>
+<!-- 그룹 선택 페이징 끝-->
 
-<c:if test="${currentPage < totalPage}">
-  <a href="boardList.do?page=${currentPage + 1}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다음</a>
+<!--  다음 페이지로 이동 -->
+<c:if test="${endPage < totalPage}">
+  <a href="boardList.do?page=${endPage + 1}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다음</a>
 </c:if>
 <c:if test="${currentPage < totalPage}">
   <a href="boardList.do?page=${totalPage}&searchType=${param.searchType}&searchKeyword=${param.searchKeyword}" class="page-link">다다음</a>
 </c:if>
   </div>
+<!--  다음 페이지로 이동 끝-->
 
   <!-- 푸터 -->
 <jsp:include page="footer.jsp" />
-
+ <!-- 푸터 끝 -->
 </body>
 </html>
 
