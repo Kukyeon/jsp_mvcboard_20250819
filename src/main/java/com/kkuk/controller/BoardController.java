@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kkuk.command.BModifyCommand;
+import com.kkuk.command.BWriteCommand;
 import com.kkuk.dao.BoardDao;
 import com.kkuk.dao.MemberDao;
 import com.kkuk.dto.BoardDto;
@@ -145,14 +147,19 @@ public class BoardController extends HttpServlet {
 			
 			request.setCharacterEncoding("utf-8");
 			
-			String bnum = request.getParameter("bnum");
-			String btitle = request.getParameter("title"); //  유저가 수정한 글 제목
-			String bcontent = request.getParameter("content"); // 수정하려는 글 내용
-			String memberid = request.getParameter("author"); // 수정 작성자
+//			String bnum = request.getParameter("bnum");
+//			String btitle = request.getParameter("title"); //  유저가 수정한 글 제목
+//			String bcontent = request.getParameter("content"); // 수정하려는 글 내용
+//			String memberid = request.getParameter("author"); // 수정 작성자
+//			
+//			boardDao.boardUpdate(bnum, btitle, bcontent);
+//			BoardDto bDto = boardDao.contentView(bnum); // 수정한 글 번호로 수정한 글 다시 가져오기
+//			request.setAttribute("bDto", bDto);
 			
-			boardDao.boardUpdate(bnum, btitle, bcontent);
-			BoardDto bDto = boardDao.contentView(bnum); // 수정한 글 번호로 수정한 글 다시 가져오기
-			request.setAttribute("bDto", bDto);
+			// 커맨드에서 불러와서 줄여주기
+			BModifyCommand bModifyCommand = new BModifyCommand();
+			bModifyCommand.excute(request, response);
+			
 			viewPage = "contentView.jsp";
 			
 		}else if(comm.equals("/delete.do")) { // 글삭제 후 글목록으로
@@ -185,11 +192,16 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("bDto", bDto);
 			viewPage = "contentView.jsp";
 		}else if(comm.equals("/writeOk.do")) {
-			request.setCharacterEncoding("utf-8");
-			String btitle = request.getParameter("title"); //  유저가 입력한 글 제목
-			String bcontent = request.getParameter("content");
-			String memberid = request.getParameter("author"); // 작성자
-			boardDao.boardWrite(btitle, bcontent, memberid);
+//			request.setCharacterEncoding("utf-8");
+//			String btitle = request.getParameter("title"); //  유저가 입력한 글 제목
+//			String bcontent = request.getParameter("content");
+//			String memberid = request.getParameter("author"); // 작성자
+//			boardDao.boardWrite(btitle, bcontent, memberid);
+			
+			// 커맨드에서 호출
+			BWriteCommand bWriteCommand = new BWriteCommand();
+			bWriteCommand.excute(request, response);
+			
 			response.sendRedirect("boardList.do"); // 포워딩을 하지않고 강제로 이동
 			return; // 프로그램의 진행 멈춤
 		}else if(comm.equals("/login.do")) {
